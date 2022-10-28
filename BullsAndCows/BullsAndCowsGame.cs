@@ -20,9 +20,11 @@ namespace BullsAndCows
         {
             var guessDigits = guess.Split(' ');
             var secretDigits = secret.Split(' ');
+            int sameValuesCount = guessDigits.Where((t, index) => secretDigits.Contains(t)).Count();
             int countBulls = CountBulls(guessDigits, secretDigits);
+            int countCows = sameValuesCount - countBulls;
 
-            return $"{countBulls}A0B";
+            return $"{countBulls}A{countCows}B";
         }
 
         private static int CountBulls(string[] guessDigits, string[] secretDigits)
