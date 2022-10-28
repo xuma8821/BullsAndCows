@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -18,23 +20,14 @@ namespace BullsAndCows
         {
             var guessDigits = guess.Split(' ');
             var secretDigits = secret.Split(' ');
-            int countBulls = 0;
-            countBulls = CountBulls(guessDigits, secretDigits, countBulls);
+            int countBulls = CountBulls(guessDigits, secretDigits);
 
             return $"{countBulls}A0B";
         }
 
-        private static int CountBulls(string[] guessDigits, string[] secretDigits, int countBulls)
+        private static int CountBulls(string[] guessDigits, string[] secretDigits)
         {
-            for (int i = 0; i < secretDigits.Length; i++)
-            {
-                if (secretDigits[i] == guessDigits[i])
-                {
-                    countBulls++;
-                }
-            }
-
-            return countBulls;
+            return secretDigits.Where((t, index) => t == guessDigits[index]).Count();
         }
     }
 }
